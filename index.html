@@ -1115,19 +1115,19 @@
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab(event,'tab-anim')">Weapon System</button>
+    <button class="tab-btn active" onclick="switchTab(event,'tab-Weapon')">Weapon System</button>
     <button class="tab-btn" onclick="switchTab(event,'tab-gas')">Ability System</button>
     <button class="tab-btn" onclick="switchTab(event,'tab-move')">Movement</button>
   </div>
 
-  <!-- TAB: Animation -->
-  <div id="tab-anim" class="tab-content active">
+  <!-- TAB: Weapon System -->
+  <div id="tab-Weapon" class="tab-content active">
     <div class="deep-dive-grid">
       <div class="deep-text">
         <h3>Weapon System 구조</h3>
         <p>
-          DataAsset에 캐릭터의 무기를 등록하고,
-          런타임에 현재 무기의 정보를 가져와
+          DataAsset에 캐릭터의 무기를 등록하고,<br>
+          런타임에 현재 무기의 정보를 가져와<br>
           캐릭터에 무기를 부여하는 구조로 설계했습니다.
         </p>
         <ul>
@@ -1140,35 +1140,11 @@
         </ul>
       </div>
       <div>
-        <div class="code-block" data-lang="C++">
-          <pre><span class="c-comment">// PoseSearch 채널 가중치 설정 예시</span>
-<span class="c-keyword">void</span> <span class="c-type">UMyAnimInstance</span>::<span class="c-fn">UpdateMotionMatchingWeights</span>()
-{
-    <span class="c-keyword">bool</span> bInCombat = <span class="c-fn">HasTag</span>(<span class="c-string">Tag_State_Combat</span>);
-
-    <span class="c-comment">// 전투 시 상체 동작에 가중치 증가</span>
-    <span class="c-type">FPoseSearchChannelSettings</span> Settings;
-    Settings.PoseWeight    = bInCombat ? <span class="c-num">0.4f</span> : <span class="c-num">0.6f</span>;
-    Settings.TrajectoryWeight = bInCombat ? <span class="c-num">0.6f</span> : <span class="c-num">0.4f</span>;
-
-    <span class="c-fn">SetMotionMatchingChannelWeights</span>(Settings);
-}</pre>
+        <div class="code-block">
+          <img src="Images/WeaponData.png" alt="Weapon system code example" />
         </div>
-        <div class="code-block" data-lang="C++">
-          <pre><span class="c-comment">// Trajectory 목표 생성</span>
-<span class="c-type">FPoseSearchQueryTrajectorySample</span>
-<span class="c-type">UMyAnimInstance</span>::<span class="c-fn">BuildTrajectorySample</span>(
-    <span class="c-keyword">float</span> DeltaTime) <span class="c-keyword">const</span>
-{
-    <span class="c-type">FVector</span> Velocity   = <span class="c-fn">GetOwnerVelocity</span>();
-    <span class="c-type">FVector</span> InputDir   = <span class="c-fn">GetInputVector</span>();
-
-    <span class="c-comment">// 0.5초 뒤 예측 위치</span>
-    <span class="c-type">FVector</span> FuturePos  = Velocity * <span class="c-num">0.5f</span>
-                       + InputDir * <span class="c-num">200.f</span>;
-
-    <span class="c-keyword">return</span> { FuturePos, Velocity };
-}</pre>
+        <div class="result-block">
+          <img src="result.png" alt="Weapon system result example" />
         </div>
       </div>
     </div>
